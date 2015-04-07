@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coderwood.bill.mapper.BillinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.coderwood.bill.entity.Billinfo" >
+    <id column="infoid" property="infoid" jdbcType="BIGINT" />
+    <result column="itemid" property="itemid" jdbcType="BIGINT" />
+    <result column="amout" property="amout" jdbcType="REAL" />
+    <result column="infotype" property="infotype" jdbcType="BIT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    infoid, itemid, amout, infotype, createtime, updatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from billinfo
+    where infoid = #{infoid,jdbcType=BIGINT}
+  </select>
+   <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from billinfo
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from billinfo
+    where infoid = #{infoid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.coderwood.bill.entity.Billinfo" >
+    insert into billinfo (infoid, itemid, amout, 
+      infotype, createtime, updatetime
+      )
+    values (#{infoid,jdbcType=BIGINT}, #{itemid,jdbcType=BIGINT}, #{amout,jdbcType=REAL}, 
+      #{infotype,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.coderwood.bill.entity.Billinfo" >
+    insert into billinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="infoid != null" >
+        infoid,
+      </if>
+      <if test="itemid != null" >
+        itemid,
+      </if>
+      <if test="amout != null" >
+        amout,
+      </if>
+      <if test="infotype != null" >
+        infotype,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="infoid != null" >
+        #{infoid,jdbcType=BIGINT},
+      </if>
+      <if test="itemid != null" >
+        #{itemid,jdbcType=BIGINT},
+      </if>
+      <if test="amout != null" >
+        #{amout,jdbcType=REAL},
+      </if>
+      <if test="infotype != null" >
+        #{infotype,jdbcType=BIT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coderwood.bill.entity.Billinfo" >
+    update billinfo
+    <set >
+      <if test="itemid != null" >
+        itemid = #{itemid,jdbcType=BIGINT},
+      </if>
+      <if test="amout != null" >
+        amout = #{amout,jdbcType=REAL},
+      </if>
+      <if test="infotype != null" >
+        infotype = #{infotype,jdbcType=BIT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where infoid = #{infoid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coderwood.bill.entity.Billinfo" >
+    update billinfo
+    set itemid = #{itemid,jdbcType=BIGINT},
+      amout = #{amout,jdbcType=REAL},
+      infotype = #{infotype,jdbcType=BIT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where infoid = #{infoid,jdbcType=BIGINT}
+  </update>
+</mapper>
